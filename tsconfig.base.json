@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sezenta/antd-schema-form": ["libs/antd-schema-form/src/index.ts"],
+      "@sezenta/antd-schema-form-adapters": [
+        "libs/antd-schema-form-adapters/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
