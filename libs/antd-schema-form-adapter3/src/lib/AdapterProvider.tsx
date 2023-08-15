@@ -1,32 +1,33 @@
 'use client';
 import React, {FC, PropsWithChildren} from 'react';
-import styled from "styled-components";
+import styled, {ServerStyleSheet, StyleSheetManager} from "styled-components";
 import {GlobalToken, theme} from "antd";
+import {a} from "vitest/dist/types-198fd1d9";
 const { useToken } = theme;
 
-const AdapterProviderStyle = styled.div<{ token: GlobalToken }>`
+const AdapterProviderStyle = styled.div<{ $token: GlobalToken }>`
   .ant-form-item-has-error .PhoneInputInput {
-    border-color: red !important;
+    border-color: ${({$token}) => $token.colorErrorBorder} !important;
   }
 
   .ant-form-item-has-error .PhoneInputInput:focus {
-    border-color: red !important;
+    border-color: ${({$token}) => $token.colorErrorBorder} !important;
     box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06) !important;
   }
 
   .ant-form-item-has-error .ql-toolbar {
-    border-color: red !important;
+    border-color: ${({$token}) => $token.colorErrorBorder} !important;
   }
   .ant-form-item-has-error .ql-container {
-    border-color: red !important;
+    border-color: ${({$token}) => $token.colorErrorBorder} !important;
   }
 
   .ant-form-item-has-error .quill:focus-within .ql-toolbar {
-    border-color: red !important;
+    border-color: ${({$token}) => $token.colorErrorBorder} !important;
     box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06) !important;
   }
   .ant-form-item-has-error .quill:focus-within .ql-container {
-    border-color: red !important;
+    border-color: ${({$token}) => $token.colorErrorBorder} !important;
     box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06) !important;
   }
 
@@ -60,11 +61,13 @@ const AdapterProviderStyle = styled.div<{ token: GlobalToken }>`
   }
 
 `
-export const AntdSchemaFormAdapterProvider: FC<PropsWithChildren> = (props) => {
+export const AntdSchemaFormAdapterProvider: FC<PropsWithChildren<{sheet: any}>> = (props) => {
   const { token } = useToken();
-  return (
-    <AdapterProviderStyle $token={token}>
-      {props.children}
-    </AdapterProviderStyle>
+  return (<StyleSheetManager sheet={props.sheet}>
+      <AdapterProviderStyle $token={token}>
+        {props.children}
+      </AdapterProviderStyle>
+  </StyleSheetManager>
+
   );
 };

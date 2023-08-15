@@ -1,12 +1,12 @@
 /// <reference types="vitest" />
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import {nxViteTsPaths} from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import dts from 'vite-plugin-dts';
 import * as path from 'path';
 
 export default defineConfig({
-  cacheDir: '../../node_modules/.vite/antd-schema-form-adapters',
+  cacheDir: '../../node_modules/.vite/antd-schema-form-adapter2',
 
   plugins: [
     dts({
@@ -29,7 +29,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'antd-schema-form-adapters',
+      name: 'antd-schema-form-adapter2',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -37,7 +37,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime', 'antd', '@ant-design/icons', 'antd/es/form', 'dayjs', 'antd/lib/col', '@sezenta/antd-schema-form', 'react-html-parser',  'react-phone-number-input', 'react-quill'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
     },
   },
 });

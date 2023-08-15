@@ -28,7 +28,7 @@ const useOmitFields = (value: any, ...fields: string[]) => {
 
 const regex = /(<([^>]+)>)/gi;
 
-const RichTextWrapper = styled.div<{ $token: GlobalToken }>`
+export const RichTextWrapper = styled.div<{ $token: GlobalToken }>`
   .richText {
     display: flex;
     flex-direction: column;
@@ -59,6 +59,17 @@ const RichTextWrapper = styled.div<{ $token: GlobalToken }>`
     border-bottom-right-radius: 4px;
   }
 
+  .quill:hover {
+    .ql-toolbar {
+      border-color: ${({ $token }) => $token.colorPrimary};
+      border-inline-end-width: 1px;
+    }
+    .ql-container {
+      border-color: ${({ $token }) => $token.colorPrimary};
+      border-inline-end-width: 1px;
+    }
+  }
+
   .quill:focus-within {
     .ql-toolbar {
       border-color: ${({ $token }) => $token.colorPrimary};
@@ -82,7 +93,7 @@ const RichTextWrapper = styled.div<{ $token: GlobalToken }>`
   }
 `;
 
-export const RichTextInput: FC<RichTextInputProps> = (props) => {
+export const RichTextInputInt: FC<RichTextInputProps> = (props) => {
   const formats = useMemo(
     () => [
       // 'header',
@@ -130,8 +141,6 @@ export const RichTextInput: FC<RichTextInputProps> = (props) => {
       event.preventDefault();
   };
   const { token } = useToken();
-  console.log('APPAAAAAAAAAAA', (typeof window === "undefined" ||
-    window.document === undefined || window.document.createElement === undefined))
   if (typeof window === "undefined" ||
     window.document === undefined || window.document.createElement === undefined) {
     return <Input.TextArea/>
@@ -141,6 +150,7 @@ export const RichTextInput: FC<RichTextInputProps> = (props) => {
         <ReactQuill
           onKeyDown={checkCharacterCount}
           modules={modules}
+          theme="snow"
           preserveWhitespace={true}
           value={props.value ? (props.value as string) : ''}
           onChange={(content: any) => props.onChange && props.onChange(content)}
@@ -159,3 +169,5 @@ export const RichTextInput: FC<RichTextInputProps> = (props) => {
     </RichTextWrapper>
   );
 };
+
+export const RichTextInput: FC<RichTextInputProps> = (props) => <Suspense><RichTextInputInt {...props}/></Suspense>

@@ -1,0 +1,15 @@
+.ant-form-item-has-error .ql-toolbar {
+  border-color: red !important;
+}
+.ant-form-item-has-error .ql-container {
+  border-color: red !important;
+}
+
+.ant-form-item-has-error .quill:focus-within .ql-toolbar {
+  border-color: red !important;
+  box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06) !important;
+}
+.ant-form-item-has-error .quill:focus-within .ql-container {
+  border-color: red !important;
+  box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06) !important;
+}

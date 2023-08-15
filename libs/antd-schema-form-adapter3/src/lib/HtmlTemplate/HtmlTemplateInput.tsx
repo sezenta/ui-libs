@@ -6,7 +6,7 @@ import { HtmlView } from './HtmlView';
 import styled from 'styled-components';
 const { useToken } = theme;
 
-const TemplateEditorDiv = styled.div<{ token: GlobalToken }>`
+const TemplateEditorDiv = styled.div<{ $token: GlobalToken }>`
   .templateEditor {
     position: relative;
     min-height: 100px;
@@ -27,7 +27,7 @@ const TemplateEditorDiv = styled.div<{ token: GlobalToken }>`
     align-items: center;
   }
   .templateEditorOverlay:not(:hover) {
-    border-color: ${({ token }) => token.colorBorder} !important;
+    border-color: ${({ $token }) => $token.colorBorder} !important;
   }
   .emailEditor {
     width: 100%;
@@ -41,8 +41,8 @@ const TemplateEditorDiv = styled.div<{ token: GlobalToken }>`
 
   .template-click-here {
     background-color: white;
-    color: ${({ token }) => token.colorText};
-    border: 1px solid ${({ token }) => token.colorBorder};
+    color: ${({ $token }) => $token.colorText};
+    border: 1px solid ${({ $token }) => $token.colorBorder};
     padding: 8px 16px;
     width: min-content;
   }

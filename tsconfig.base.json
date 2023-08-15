@@ -16,7 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@sezenta/antd-schema-form": ["libs/antd-schema-form/src/index.ts"],
+      "@sezenta/antd-schema-form-adapter2": [
+        "libs/antd-schema-form-adapter2/src/index.ts"
+      ],
       "@sezenta/antd-schema-form-adapters": [
+        "libs/antd-schema-form-adapter3/src/index.ts"
+      ],
+      "@sezenta/antd-schema-form-adapters3": [
         "libs/antd-schema-form-adapters/src/index.ts"
       ]
     }
