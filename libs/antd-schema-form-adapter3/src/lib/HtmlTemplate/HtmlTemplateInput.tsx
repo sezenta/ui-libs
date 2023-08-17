@@ -95,7 +95,7 @@ export const HtmlTemplateInput: FC<HtmlTemplateInputProps> = ({
       designer.current !== undefined &&
       designer.current !== null &&
       editorLoaded.current &&
-      value
+      value?.design !== undefined
     ) {
       designer.current?.loadDesign?.(JSON.parse(value.design));
     }
