@@ -2,7 +2,6 @@
   "name": "@sezenta/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
   "private": true,
   "dependencies": {
     "@nx/next": "16.6.0",
@@ -62,5 +61,12 @@
     "vite": "~4.3.9",
     "vite-plugin-dts": "~2.3.0",
     "vitest": "~0.32.0"
+  },
+  "volta": {
+    "node": "18.17.0",
+    "yarn": "3.6.1"
+  },
+  "resolutions": {
+    "react-email-editor@^1.7.8": "patch:react-email-editor@npm%3A1.7.8#./.yarn/patches/react-email-editor-npm-1.7.8-e31efbb448.patch"
   }
 }

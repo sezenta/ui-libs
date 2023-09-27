@@ -37,7 +37,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime', 'antd', '@ant-design/icons', 'antd/es/form', 'dayjs', 'antd/lib/col', '@sezenta/antd-schema-form', 'react-html-parser',  'react-phone-number-input', 'react-quill'],
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'antd', '@ant-design/icons', 'antd/es/form', 'dayjs', 'antd/lib/col', '@sezenta/antd-schema-form',  'react-phone-number-input', 'react-quill'],
     },
   },
 });

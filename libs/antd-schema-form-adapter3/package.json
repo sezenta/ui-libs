@@ -1,6 +1,6 @@
 {
   "name": "@sezenta/antd-schema-form-adapters",
-  "version": "0.0.20",
+  "version": "0.0.24",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {

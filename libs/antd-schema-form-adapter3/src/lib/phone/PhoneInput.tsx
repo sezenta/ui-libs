@@ -1,12 +1,13 @@
 'use client';
 import ReactPhoneInput, {
-  DefaultInputComponentProps,
+  DefaultInputComponentProps, isValidPhoneNumber,
 } from 'react-phone-number-input';
 import { FC } from 'react';
 import { GlobalToken, theme } from 'antd';
 import styled from 'styled-components';
 import 'react-phone-number-input/style.css';
 import './PhoneInput.css';
+import {ValidationAdapter} from "@sezenta/antd-schema-form";
 const { useToken } = theme;
 
 const PhoneInputWrapper = styled.div<{ $token: GlobalToken }>`
@@ -82,4 +83,19 @@ export const PhoneInput: FC<PhoneInputProps> = (props) => {
       <ReactPhoneInput {...props} value={props.value ?? ''} />
     </PhoneInputWrapper>
   );
+};
+
+export const PhoneValidationAdapter: ValidationAdapter = {
+  name: 'phone',
+  message: 'Should be valid phone number',
+  validator: async (_: any, value: any) => {
+    if (value === undefined || value === '') {
+      return;
+    }
+    if (!value || isValidPhoneNumber(value)) {
+      return;
+    } else {
+      throw Error('Invalid phone number');
+    }
+  },
 };

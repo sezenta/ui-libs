@@ -1,8 +1,7 @@
 import {MapProps} from "@sezenta/antd-schema-form";
-import {PhoneInput} from "./phone/PhoneInput";
+import {PhoneInput, PhoneValidationAdapter} from "./phone/PhoneInput";
 import {RichTextInput} from "./RichText/RichTextInput";
 import {HtmlTemplateInput} from "./HtmlTemplate/HtmlTemplateInput";
-import styled from "styled-components";
 
 export const AntdSchemaFormAdapters = {
   phone: MapProps(PhoneInput as any, {
@@ -20,3 +19,7 @@ export const AntdSchemaFormAdapters = {
   }),
   template: HtmlTemplateInput,
 }
+
+export const AntdSchemaFormValidationAdapters = [
+  PhoneValidationAdapter
+]

@@ -23,7 +23,7 @@ export interface FormColumn {
 
 export interface FormField {
   id: string;
-  name?: NamePath;
+  name?: React.ReactNode;
   tips?: string;
   type:
     | 'string'
