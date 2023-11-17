@@ -24,6 +24,13 @@
       ],
       "@sezenta/antd-schema-form-adapters3": [
         "libs/antd-schema-form-adapters/src/index.ts"
+      ],
+      "@sezenta/connection": ["libs/connection/src/index.ts"],
+      "@sezenta/react-native-connection": [
+        "libs/react-native-connection/src/index.ts"
+      ],
+      "@sezenta/react-native-schema-form": [
+        "libs/react-native-schema-form/src/index.ts"
       ]
     }
   },

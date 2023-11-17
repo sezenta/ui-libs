@@ -1,0 +1,18 @@
+{
+  "name": "@sezenta/connection",
+  "version": "0.0.6",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "dependencies": {
+    "axios": "^1.5.1",
+    "jwt-decode": "^3.1.2",
+    "mem": "^9.0.2",
+    "react-cookie": "^6.1.1"
+  }
+}
