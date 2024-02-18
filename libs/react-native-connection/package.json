@@ -1,6 +1,6 @@
 {
   "name": "@sezenta/react-native-connection",
-  "version": "0.0.3",
+  "version": "0.0.9",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -8,5 +8,8 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "peerDependencies": {
+    "@react-native-async-storage/async-storage": "1.19.3"
   }
 }

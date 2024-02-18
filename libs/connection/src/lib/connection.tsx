@@ -48,6 +48,11 @@ export const ConnectionProvider: FC<
     'refreshToken',
   ]);
   const accessTokenRef = useRef(cookies.accessToken);
+  const accessTokenExp = useRef(tryAndDefault(() => {
+    return cookies.accessToken
+      ? (JwtDecode(cookies.accessToken) as any).exp
+      : null;
+  }, null));
   const [user, setUser] = useState<any | null | undefined>(
     tryAndDefault(() => {
       return props.refreshToken
@@ -57,6 +62,11 @@ export const ConnectionProvider: FC<
   );
   useEffect(() => {
     accessTokenRef.current = cookies.accessToken;
+    accessTokenExp.current = tryAndDefault(() => {
+      return cookies.accessToken
+        ? (JwtDecode(cookies.accessToken) as any).exp * 1000
+        : null;
+    }, null);
     const u: any = cookies.refreshToken
       ? JwtDecode(cookies.refreshToken)
       : null;
@@ -73,6 +83,11 @@ export const ConnectionProvider: FC<
       const refreshDecoded: any = JwtDecode(refreshToken);
       const accessDecoded: any = JwtDecode(accessToken);
       accessTokenRef.current = accessToken;
+      accessTokenExp.current = tryAndDefault(() => {
+        return accessToken
+          ? (JwtDecode(accessToken) as any).exp * 1000
+          : null;
+      }, null);
       const user: any = refreshDecoded.user;
       setUser(user);
       console.log('USER', refreshDecoded, user);
@@ -113,16 +128,20 @@ export const ConnectionProvider: FC<
             domain: props.cookieDomain,
           });
           accessTokenRef.current = undefined;
+          accessTokenExp.current = null;
           return { refreshToken, accessToken };
         }
 
         setTokens(accessToken, refreshToken);
 
         return { refreshToken, accessToken };
-      } catch (error) {
-        removeCookie('accessToken', { path: '/', domain: props.cookieDomain });
-        removeCookie('refreshToken', { path: '/', domain: props.cookieDomain });
-        return { refreshToken: undefined, accessToken: undefined };
+      } catch (error: any) {
+        if (error?.response?.status === 401) {
+          removeCookie('accessToken', { path: '/', domain: props.cookieDomain });
+          removeCookie('refreshToken', { path: '/', domain: props.cookieDomain });
+          return { refreshToken: undefined, accessToken: undefined };
+        }
+        throw error;
       }
     };
 
@@ -135,7 +154,7 @@ export const ConnectionProvider: FC<
     axiosPrivate.interceptors.request.use(
       async (config) => {
         let accessToken = accessTokenRef.current;
-        if (!accessToken) {
+        if (!accessToken || accessTokenExp.current === null || accessTokenExp.current < Date.now() - 60000) {
           const refreshToken = cookies.refreshToken;
           if (!refreshToken) {
             return config;
@@ -170,7 +189,7 @@ export const ConnectionProvider: FC<
       async (error) => {
         const config = error?.config;
 
-        if (error?.response?.status === 401 && !config?.sent) {
+        if (error?.response?.status === 401 && error?.response?.data?.code === 'TOKEN_EXPIRED' && !config?.sent) {
           config.sent = true;
 
           const result = await memoizedRefreshToken();

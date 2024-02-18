@@ -12,6 +12,7 @@ import axios, { AxiosInstance } from 'axios';
 import JwtDecode from 'jwt-decode';
 import mem from 'mem';
 import { PublicConnection } from './public-connection';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function tryAndDefault<T>(exec: () => T, defaultValue: T) {
   try {
@@ -44,6 +45,8 @@ export const ConnectionProvider: FC<
 > = (props) => {
   const accessTokenRef = useRef<string | undefined>(undefined);
   const [user, setUser] = useState<any | null | undefined>(undefined);
+  AsyncStorage.getItem('@auth-session').then(val => console.log('SESSION', val)).catch(reason => console.log('SESSION ERROR', reason));
+
   // useEffect(() => {
   //   accessTokenRef.current = cookies.accessToken;
   //   const u: any = cookies.refreshToken

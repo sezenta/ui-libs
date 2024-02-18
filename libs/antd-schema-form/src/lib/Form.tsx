@@ -246,7 +246,7 @@ const SchemaFormItem = (props: SchemaFormItemProps) => {
                           okText="Yes"
                           okButtonProps={{ danger: true }}
                           cancelText="No">
-                          <CloseCircleFilled />
+                          <Button type="text" danger={true} icon={<CloseCircleFilled />}/>
                         </Popconfirm>
                       </div>
                     )}
